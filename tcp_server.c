@@ -41,6 +41,7 @@ void* handleClient(void* arg) {
   }
 
   close(new_client->socket);
+  free(new_client);
   pthread_exit(NULL);
 }
 
