@@ -95,8 +95,3 @@ int main() {
     close(network_socket);
     return 0;
 }
-
-  // close socket
-  close(network_socket);
-  return 0;
-}
