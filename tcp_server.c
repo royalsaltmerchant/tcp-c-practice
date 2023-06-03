@@ -1,11 +1,11 @@
+#include <netinet/in.h>
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include <netinet/in.h>
-#include <pthread.h>
 
 #define BUFFER_SIZE 1024
 
@@ -44,8 +44,7 @@ void* handleClient(void* arg) {
   pthread_exit(NULL);
 }
 
-int main()
-{
+int main() {
   // create the server socket
   int server_socket;
   server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -57,11 +56,11 @@ int main()
   server_address.sin_addr.s_addr = INADDR_ANY;
 
   // bind the socket to the IP port
-  bind(server_socket, (struct sockaddr *)&server_address, sizeof(server_address));
+  bind(server_socket, (struct sockaddr*)&server_address, sizeof(server_address));
   // listen
   listen(server_socket, 3);
 
-  while(1) {
+  while (1) {
     // accept client sockets
     int client_socket;
     client_socket = accept(server_socket, NULL, NULL);
@@ -69,14 +68,14 @@ int main()
       perror("Failed to accept client connection");
       exit(1);
     }
-      // send message to a client
+    // send message to a client
 
     Client* new_client = malloc(sizeof(Client));
     new_client->id = 1;
     new_client->socket = client_socket;
 
     pthread_t threadId;
-    int result = pthread_create(&threadId, NULL, handleClient, (void *)new_client);
+    int result = pthread_create(&threadId, NULL, handleClient, (void*)new_client);
 
     if (result != 0) {
       perror("Failed to spawn thread");
