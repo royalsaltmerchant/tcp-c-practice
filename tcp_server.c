@@ -26,7 +26,7 @@ void* handleClient(void* arg) {
     memset(buffer, 0, BUFFER_SIZE);  // Clear the buffer
 
     // Receive data from the server
-    ssize_t bytesRead = recv(new_client->socket, &buffer, BUFFER_SIZE - 1, 0);
+    ssize_t bytesRead = recv(new_client->socket, buffer, BUFFER_SIZE - 1, 0);
     if (bytesRead == -1) {
       perror("Failed to receive data");
       break;
